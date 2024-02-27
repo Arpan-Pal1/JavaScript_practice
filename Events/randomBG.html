@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Practice</title>
+</head>
+<body>
+    <h1>This is heading</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+
+    // setInterval(function(){
+    //     console.log("hello arpan", Date.now());
+    // }, 2000)
+
+    // const sayDate = function(str){
+    //     console.log(`${str} Arpan ${Date.now()}`);
+    // }
+    
+
+
+    // const intervalId = setInterval(sayDate, 1000, "hello")
+
+    // clearInterval(intervalId)
+
+
+
+    // task 
+
+    // working wiht start button
+
+    const getRandomNumber = function () {
+        return Math.floor((Math.random() * 255) + 1)
+    }
+    const startChanging = function(){
+
+        document.body.style.background = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`
+    }
+
+    let intervalId
+
+    document.querySelector('#start').addEventListener('click', function(){
+         intervalId = setInterval(startChanging, 1000)
+    })
+
+    // working with stop button
+
+
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearInterval(intervalId)
+        intervalId = null
+        console.log('stopped');
+    })
+
+    
+
+
+
+</script>
+</html>

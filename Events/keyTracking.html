@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2</title>
+</head>
+
+<body>
+    <h1>Best Project ever made</h1>
+
+    <div id="insert">
+        <p>Type any key</p>
+        
+    </div>
+</body>
+
+<script>
+
+    addEventListener('keypress', function (e) { 
+        const para = document.createElement('p')
+        para.appendChild(document.createTextNode(e.key))
+        document.querySelector('#insert').appendChild(para)
+    }, false)
+</script>
+
+</html>

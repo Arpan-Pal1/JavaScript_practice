@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async</title>
+</head>
+<body>
+    <h1>This is heading</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+
+    // setTimeout(function(){
+    //     console.log('arpan');
+    // }, 2000)
+
+    const sayArpan = function () {
+        
+        console.log("hello arpan");
+    }
+
+    
+
+    setTimeout(sayArpan, 2000)
+
+    const changeText = function () {
+        document.querySelector('h1').innerHTML = "Arpan is best"
+    }
+
+    const changeHeading = setTimeout(changeText, 3000)
+
+    clearTimeout(changeHeading)
+
+    document.querySelector('#stop').addEventListener('click', function(e){
+        clearTimeout(changeHeading)
+        console.log('Stopped');
+    }, false)
+
+</script>
+</html>

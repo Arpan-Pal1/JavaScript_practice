@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+
+<body>
+    <h2>Amazing Images</h2>
+    <ul id="images" style="list-style: none;">
+        <li><img src="https://images.pexels.com/photos/672630/pexels-photo-672630.jpeg" alt="" width="200px" id="puri">
+        </li>
+        <li><img src="https://images.pexels.com/photos/57901/pexels-photo-57901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="" width="200px" id="varanasi"></li>
+        <li><img src="https://images.pexels.com/photos/618491/pexels-photo-618491.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="" width="200px" id="kolkata"></li>
+        <li><img src="https://images.pexels.com/photos/1065753/pexels-photo-1065753.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="" width="200px" id="kerala"></li>
+        <li><img src="https://images.pexels.com/photos/2728252/pexels-photo-2728252.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="" width="200px" id="holi" "></li>
+
+        <a href="https://google.com" style="text-decoration: none; color: black;" target="_blank" id="google"><li>Google</li></a>
+    </ul>
+</body>
+    <script>
+        // old approch and here onclick gives less power not a good approch to use
+        // document.getElementById('holi').onclick = function(){
+        //     alert('holi hai')
+        // }
+
+
+        // best approch for now (EventListener can listen multiple event)
+
+        // document.getElementById('holi').addEventListener('click', function(){
+        //     alert('holi hai')
+        // }, false)
+
+        // types, timestamp, defaultPrevented
+        // target, toElement, srcElement
+        // clientX , clientY, screenX, screenY
+
+
+        // propogation (Bubbling up : from bottom to top)
+        // for image id
+        // document.getElementById('images').addEventListener('click', function(e){
+        //     console.log("click inside the ul");
+        // }, false)
+
+        // for holi id
+        // document.getElementById('holi').addEventListener('click', function(e){
+        //     console.log("holi hai");
+        //     e.stopPropagation() // it will stop the propogation
+        // }, false)
+
+        // capturing mode (from top to bottom) it will first print the "click inside the ul" then "holi hai". I just have to change the false to true
+
+
+        // preventDefault usecases
+        document.getElementById('google').addEventListener('click', function(e){
+            // console.log('google clicked');
+            e.preventDefault()
+            // e.stopPropagation()
+        }, false)
+
+
+
+
+        // activity (task If I click in an image then the image should be disable)
+
+        document.querySelector('#images').addEventListener('click', function(e){
+            console.log(e.target.tagName);
+            if (e.target.tagName == 'IMG') {
+                
+                let removeIt = e.target.parentNode
+                removeIt.remove()
+            }
+
+        }, false)
+
+    </script>
+
+</html>
+
+
+/*
+I see. Event propagation is the process of how events travel through the DOM tree when an event occurs on an element¹². There are two phases of event propagation: capturing and bubbling². 
+
+- Capturing phase: The event goes down from the window to the target element, passing through its ancestors². 
+- Bubbling phase: The event goes up from the target element to the window, passing through its ancestors². 
+
+Event listeners are functions that are executed when a specific event occurs on an element³. You can add event listeners to any element using the `addEventListener` method³. This method takes three arguments: the event type, the callback function, and a boolean value that indicates whether the listener should be executed in the capturing or bubbling phase³. 
+
+For example, if you want to add a click event listener to a button element in the bubbling phase, you can write:
+
+```javascript
+const button = document.querySelector("#myButton"); // select the button element
+button.addEventListener("click", () => { // add a click event listener
+  console.log("Button clicked!"); // log a message to the console
+}, false); // indicate the bubbling phase
+```
+
+If you want to add the same listener in the capturing phase, you can change the last argument to `true`:
+
+```javascript
+button.addEventListener("click", () => {
+  console.log("Button clicked!");
+}, true); // indicate the capturing phase
+```
+
+You can also stop the event propagation by using the `stopPropagation` method on the event object⁴. This method prevents the event from reaching further elements in the capturing or bubbling phase⁴. For example, if you want to stop the click event from bubbling up to the parent elements, you can write:
+
+```javascript
+button.addEventListener("click", (event) => { // access the event object
+  event.stopPropagation(); // stop the event propagation
+  console.log("Button clicked!");
+}, false);
+```
+
+I hope this explanation helps you understand the concepts of event propagation and event listener in JavaScript. If you want to learn more, you can check out these resources:
+
+- [Event Bubbling in JavaScript – How Event Propagation Works with Examples](^1^)
+- [JavaScript Event Propagation - Tutorial Republic](^2^)
+- [JavaScript Event Listeners Ultimate Guide - Web Dev Simplified](^3^)
+- [Event Listeners in JavaScript: The Ultimate Guide](^4^)
+
+Source: Conversation with Bing, 30/12/2023
+(1) Event Bubbling in JavaScript – How Event Propagation Works with Examples. https://www.freecodecamp.org/news/event-bubbling-in-javascript/.
+(2) JavaScript Event Propagation - Tutorial Republic. https://www.tutorialrepublic.com/javascript-tutorial/javascript-event-propagation.php.
+(3) JavaScript Event Listeners Ultimate Guide - Web Dev Simplified. https://blog.webdevsimplified.com/2022-01/event-listeners/.
+(4) Master JavaScript addEventListener(): Don't be a Rookie. https://www.golinuxcloud.com/javascript-addeventlistener/.
+(5) Event Bubbling in JavaScript – How Event Propagation Works with Examples. https://www.freecodecamp.org/news/event-bubbling-in-javascript/.
+(6) JavaScript Event Propagation - Tutorial Republic. https://www.tutorialrepublic.com/javascript-tutorial/javascript-event-propagation.php.
+(7) JavaScript Event Listeners Ultimate Guide - Web Dev Simplified. https://blog.webdevsimplified.com/2022-01/event-listeners/.
+(8) Master JavaScript addEventListener(): Don't be a Rookie. https://www.golinuxcloud.com/javascript-addeventlistener/.
+(9) Event Bubbling in JavaScript? Event Propagation Explained - SitePoint. https://www.sitepoint.com/event-bubbling-javascript/.
+(10) The JavaScript Event Propagation: Explained - Towards Dev. https://towardsdev.com/event-propagation-in-javascript-4478852695cf.
+
+*/
+
+
+
+{/* event.preventDefault() is use to prevent the normal action. suppose in a form a submit button submit the page by default and you want to stop this behavior so you can use this*/}
